@@ -1,5 +1,5 @@
 PODS:
-  - OriginateHTTP (0.1.0)
+  - OriginateHTTP (0.0.1)
 
 DEPENDENCIES:
   - OriginateHTTP (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  OriginateHTTP: 28eb715464537f1e719bd99ee7439d5c0cd53888
+  OriginateHTTP: e492346b4931895eff226bcadd85d32921a379fb
 
 COCOAPODS: 0.38.2

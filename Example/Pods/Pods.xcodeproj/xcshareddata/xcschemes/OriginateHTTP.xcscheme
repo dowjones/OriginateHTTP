@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EBBE75EC7BE2EE2E7370171"
+               BlueprintIdentifier = "9E1420489CB6DBBA89BAD4AA"
                BuildableName = "OriginateHTTP.framework"
                BlueprintName = "OriginateHTTP"
                ReferencedContainer = "container:Pods.xcodeproj">
