@@ -1,0 +1,6 @@
+framework module Pods_OriginateHTTP_Tests {
+  umbrella header "Pods-OriginateHTTP_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

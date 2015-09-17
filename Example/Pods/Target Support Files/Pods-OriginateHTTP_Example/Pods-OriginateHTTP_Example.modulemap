@@ -1,0 +1,6 @@
+framework module Pods_OriginateHTTP_Example {
+  umbrella header "Pods-OriginateHTTP_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

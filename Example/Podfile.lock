@@ -1,0 +1,14 @@
+PODS:
+  - OriginateHTTP (0.1.0)
+
+DEPENDENCIES:
+  - OriginateHTTP (from `../`)
+
+EXTERNAL SOURCES:
+  OriginateHTTP:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  OriginateHTTP: 8af1ef127c688c0f0d9fb42231155dbaadf23857
+
+COCOAPODS: 0.38.2
