@@ -1,15 +1,14 @@
 {
   "name": "OriginateHTTP",
   "version": "0.1.0",
-  "summary": "A short description of OriginateHTTP.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/OriginateHTTP",
+  "summary": "A lightweight HTTP networking client backed by NSURLSession.",
+  "homepage": "https://github.com/Originate/OriginateHTTP",
   "license": "MIT",
   "authors": {
     "Allen Wu": "allen.wu@originate.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/OriginateHTTP.git",
+    "git": "https://github.com/Originate/OriginateHTTP.git",
     "tag": "0.1.0"
   },
   "platforms": {
@@ -17,9 +16,5 @@
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
-  "resource_bundles": {
-    "OriginateHTTP": [
-      "Pod/Assets/*.png"
-    ]
-  }
+  "public_header_files": "Pod/Classes/**/*.h"
 }

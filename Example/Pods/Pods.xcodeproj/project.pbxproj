@@ -7,74 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		019B96B382C94C4D5E4156FBB977AB21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD28BCB19DB4B88775AB62BD56006C /* Foundation.framework */; };
-		19C5D46772D62D0A951F5B6A5B47EB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD28BCB19DB4B88775AB62BD56006C /* Foundation.framework */; };
+		019B96B382C94C4D5E4156FBB977AB21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048568526790353F97941901E9CD308 /* Foundation.framework */; };
+		15DAAF9CA1A6C49D6AC19BF8380FF987 /* OriginateHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F25C913ED146E1BAD59F2B929399C1C8 /* OriginateHTTPClient.m */; };
+		19C5D46772D62D0A951F5B6A5B47EB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048568526790353F97941901E9CD308 /* Foundation.framework */; };
+		1B54BCDE0F354E52CD3E28101B843BFA /* OriginateHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 984A2173191B58E59E688CD51CE9B90D /* OriginateHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1D47BF48AA72703CE425CCFEC04DD7AC /* OriginateHTTP-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 544A843893044F6119FF77E73AD6E7D1 /* OriginateHTTP-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209C941902EE133C3A40833F8D4D60AF /* OriginateHTTPAuthorizedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4911B5B1863A501941AD3B83808E3441 /* OriginateHTTPAuthorizedObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		21B5F7F03FA6B541E99C7034D338A430 /* Pods-OriginateHTTP_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2DF195E32F2E5D3A4769A96E3CE984 /* Pods-OriginateHTTP_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96ADAB72303538DE9C3643704551A221 /* OriginateHTTP.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4679C763DB1D794C67A09CD1313C3945 /* OriginateHTTP.bundle */; };
-		9FAF652B1BAA3B6000655659 /* OriginateHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FAF65241BAA3B6000655659 /* OriginateHTTP.h */; };
-		9FAF652C1BAA3B6000655659 /* OriginateHTTPAuthorizedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FAF65251BAA3B6000655659 /* OriginateHTTPAuthorizedObject.h */; };
-		9FAF652D1BAA3B6000655659 /* OriginateHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FAF65261BAA3B6000655659 /* OriginateHTTPClient.h */; };
-		9FAF652E1BAA3B6000655659 /* OriginateHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAF65271BAA3B6000655659 /* OriginateHTTPClient.m */; };
-		9FAF652F1BAA3B6000655659 /* OriginateHTTPLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FAF65281BAA3B6000655659 /* OriginateHTTPLog.h */; };
-		9FAF65301BAA3B6000655659 /* OriginateHTTPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAF65291BAA3B6000655659 /* OriginateHTTPLog.m */; };
-		9FAF65311BAA3B6000655659 /* OriginateHTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FAF652A1BAA3B6000655659 /* OriginateHTTPLogging.h */; };
-		A9C9AA307EED56E83BD4C04FC46988D4 /* OriginateHTTP-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC6CEA2B5DDF43DFA38B78C88574CE2 /* OriginateHTTP-dummy.m */; };
+		4AE5C2CE900C2381EA802101D502A250 /* OriginateHTTPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 213019537E6D8D199DB6CA1C0441D6EA /* OriginateHTTPLog.m */; };
+		60B7CD1D4A155B3825ABE5B6287CBE7D /* OriginateHTTPLog.h in Headers */ = {isa = PBXBuildFile; fileRef = F3A83DF5CEF6D1E1E8F4DAD54FEA4231 /* OriginateHTTPLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A604B78DF592254ECC680C4AF59BC58 /* OriginateHTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 86EA75EFFEB4B0B50C81FB83FB52421E /* OriginateHTTPLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A7E96408E44B5C757C856D2319E271E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048568526790353F97941901E9CD308 /* Foundation.framework */; };
 		BD71A97CF8230286F38C15F5AFC90FED /* Pods-OriginateHTTP_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 256686F68BD23ED97C982169A6A55F6B /* Pods-OriginateHTTP_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE3452F8C3065E639D4A2765B3CE172C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD28BCB19DB4B88775AB62BD56006C /* Foundation.framework */; };
 		D119B78CEC8CB1696AA151AB0B2717C5 /* Pods-OriginateHTTP_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846527C0A506968BCDA3060329AD6F1 /* Pods-OriginateHTTP_Tests-dummy.m */; };
+		D237934BC176796A5F1B1BDDA3DF1B06 /* OriginateHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB2F821B4A84288FCC99EA2B7A27CBA /* OriginateHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D57D8CD83CEA3D8F7175C1938E584C3C /* Pods-OriginateHTTP_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B8C8AFDEE5F20A743D500156065AD8 /* Pods-OriginateHTTP_Example-dummy.m */; };
-		E5414292B07E4DBB5859E2779B50D5E0 /* OriginateHTTP-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CE575FE4B30235A8679C7D783CD1AF35 /* OriginateHTTP-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1E3EA91827100F9BDA238E5B6206685 /* OriginateHTTP-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A14E45D5CE5D968B5DED7F12874A8 /* OriginateHTTP-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		44555D122FC7CA58ECF795A976AFF204 /* PBXContainerItemProxy */ = {
+		638224BE7BCA4D0E5F151EC2999DDA98 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 25D2FB36FD7063A2B3FF2E42B63ADE93;
+			remoteGlobalIDString = 34F485774002BD2BADA7EFE224321B20;
 			remoteInfo = OriginateHTTP;
 		};
-		5BE1B9CA075BAEA9EA9833A21082D293 /* PBXContainerItemProxy */ = {
+		E6D61207D3C173406A3D8847D9A2B75D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 25D2FB36FD7063A2B3FF2E42B63ADE93;
+			remoteGlobalIDString = 34F485774002BD2BADA7EFE224321B20;
 			remoteInfo = OriginateHTTP;
-		};
-		73F90AE4008DD0538550E32BF735AE0F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FFFD3F0086A903C6D8E4CBC09102F5A9;
-			remoteInfo = "OriginateHTTP-OriginateHTTP";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		194C070E65FE016A6331F35390A93B79 /* Pods_OriginateHTTP_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OriginateHTTP_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		213019537E6D8D199DB6CA1C0441D6EA /* OriginateHTTPLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OriginateHTTPLog.m; sourceTree = "<group>"; };
 		256686F68BD23ED97C982169A6A55F6B /* Pods-OriginateHTTP_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OriginateHTTP_Example-umbrella.h"; sourceTree = "<group>"; };
 		3211052B5AA1D399D85B19CDE0811E5C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3896CEAEBD71FF304792CB413DC7823B /* Pods-OriginateHTTP_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OriginateHTTP_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		3ECD28BCB19DB4B88775AB62BD56006C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3DD7BE7E0CD155A27E912E0803666CE7 /* OriginateHTTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OriginateHTTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F561B9D890E6203BAD93847711F2598 /* Pods-OriginateHTTP_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OriginateHTTP_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4679C763DB1D794C67A09CD1313C3945 /* OriginateHTTP.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OriginateHTTP.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4911B5B1863A501941AD3B83808E3441 /* OriginateHTTPAuthorizedObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPAuthorizedObject.h; sourceTree = "<group>"; };
 		4B9995A45CBD5A947E3E0F1BA443CC65 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F2A14E45D5CE5D968B5DED7F12874A8 /* OriginateHTTP-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OriginateHTTP-dummy.m"; sourceTree = "<group>"; };
+		544A843893044F6119FF77E73AD6E7D1 /* OriginateHTTP-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OriginateHTTP-umbrella.h"; sourceTree = "<group>"; };
 		5AC3209EB6EC8F0088CF07B728E25588 /* Pods-OriginateHTTP_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OriginateHTTP_Tests-resources.sh"; sourceTree = "<group>"; };
 		5B7C8085D3FE659CE24901A48DCE61F4 /* OriginateHTTP-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OriginateHTTP-prefix.pch"; sourceTree = "<group>"; };
 		5D496CF59264220A8479164B0A725B05 /* OriginateHTTP.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = OriginateHTTP.modulemap; sourceTree = "<group>"; };
 		60DB6D7F61B1752DE1DB7D6CE84E774B /* OriginateHTTP.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OriginateHTTP.xcconfig; sourceTree = "<group>"; };
+		64B91FD397341660F0F5C864A4986A8C /* OriginateHTTP-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "OriginateHTTP-Private.xcconfig"; sourceTree = "<group>"; };
 		6846527C0A506968BCDA3060329AD6F1 /* Pods-OriginateHTTP_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OriginateHTTP_Tests-dummy.m"; sourceTree = "<group>"; };
 		73BE0C702C1CAB8C53775AE50FB0E4B3 /* Pods-OriginateHTTP_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OriginateHTTP_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		78B1F75EEC81B51CA8F51C909E24BCE2 /* Pods-OriginateHTTP_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-OriginateHTTP_Tests.modulemap"; sourceTree = "<group>"; };
-		8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "OriginateHTTP-Private.xcconfig"; sourceTree = "<group>"; };
+		7EB2F821B4A84288FCC99EA2B7A27CBA /* OriginateHTTPClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPClient.h; sourceTree = "<group>"; };
+		86EA75EFFEB4B0B50C81FB83FB52421E /* OriginateHTTPLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPLogging.h; sourceTree = "<group>"; };
+		9048568526790353F97941901E9CD308 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		984A2173191B58E59E688CD51CE9B90D /* OriginateHTTP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OriginateHTTP.h; sourceTree = "<group>"; };
 		9C1042CBF821901AB85ADE2AF065C5CE /* Pods-OriginateHTTP_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OriginateHTTP_Example-resources.sh"; sourceTree = "<group>"; };
-		9FAF65241BAA3B6000655659 /* OriginateHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginateHTTP.h; sourceTree = "<group>"; };
-		9FAF65251BAA3B6000655659 /* OriginateHTTPAuthorizedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPAuthorizedObject.h; sourceTree = "<group>"; };
-		9FAF65261BAA3B6000655659 /* OriginateHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPClient.h; sourceTree = "<group>"; };
-		9FAF65271BAA3B6000655659 /* OriginateHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginateHTTPClient.m; sourceTree = "<group>"; };
-		9FAF65281BAA3B6000655659 /* OriginateHTTPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPLog.h; sourceTree = "<group>"; };
-		9FAF65291BAA3B6000655659 /* OriginateHTTPLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginateHTTPLog.m; sourceTree = "<group>"; };
-		9FAF652A1BAA3B6000655659 /* OriginateHTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPLogging.h; sourceTree = "<group>"; };
 		A2B8C8AFDEE5F20A743D500156065AD8 /* Pods-OriginateHTTP_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OriginateHTTP_Example-dummy.m"; sourceTree = "<group>"; };
 		A93C357BC1DE1E93FA8BFD4A800EF86A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD5AAE543112400F18F10487960BB7F7 /* Pods-OriginateHTTP_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-OriginateHTTP_Example.modulemap"; sourceTree = "<group>"; };
@@ -84,28 +76,20 @@
 		BE2DF195E32F2E5D3A4769A96E3CE984 /* Pods-OriginateHTTP_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OriginateHTTP_Tests-umbrella.h"; sourceTree = "<group>"; };
 		C26C2AE710F0ED6F8B40981801867CDF /* Pods-OriginateHTTP_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OriginateHTTP_Example-frameworks.sh"; sourceTree = "<group>"; };
 		CB16BDAFF887E14E644DC316299FE360 /* Pods-OriginateHTTP_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OriginateHTTP_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CE575FE4B30235A8679C7D783CD1AF35 /* OriginateHTTP-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OriginateHTTP-umbrella.h"; sourceTree = "<group>"; };
 		D2E8F47121821CE9E6C8A5FE6FFC2C12 /* Pods-OriginateHTTP_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OriginateHTTP_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		DDC6CEA2B5DDF43DFA38B78C88574CE2 /* OriginateHTTP-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OriginateHTTP-dummy.m"; sourceTree = "<group>"; };
 		E64900AD35A8FEF3BE982922A1C9D43A /* Pods-OriginateHTTP_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OriginateHTTP_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E8C44FAC6D35A1E4F2CE35DA1463E6E0 /* Pods-OriginateHTTP_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OriginateHTTP_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F8E4234CFDA38C1CDAF2990527CE8853 /* OriginateHTTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OriginateHTTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F25C913ED146E1BAD59F2B929399C1C8 /* OriginateHTTPClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OriginateHTTPClient.m; sourceTree = "<group>"; };
+		F3A83DF5CEF6D1E1E8F4DAD54FEA4231 /* OriginateHTTPLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OriginateHTTPLog.h; sourceTree = "<group>"; };
 		FFA9D9EED242F3BFB195297B41413258 /* Pods_OriginateHTTP_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OriginateHTTP_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0DBAF5014E757D3AFDFE8AA4E4F6A519 /* Frameworks */ = {
+		66D614CBA5EB62A9F119732CD6969D52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5AB9B3EB253575B9CC1C0BBE52B38508 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE3452F8C3065E639D4A2765B3CE172C /* Foundation.framework in Frameworks */,
+				9A7E96408E44B5C757C856D2319E271E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,10 +112,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		017FE4DA34D4AFDB6D31817CF861D717 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				984A2173191B58E59E688CD51CE9B90D /* OriginateHTTP.h */,
+				4911B5B1863A501941AD3B83808E3441 /* OriginateHTTPAuthorizedObject.h */,
+				7EB2F821B4A84288FCC99EA2B7A27CBA /* OriginateHTTPClient.h */,
+				F25C913ED146E1BAD59F2B929399C1C8 /* OriginateHTTPClient.m */,
+				F3A83DF5CEF6D1E1E8F4DAD54FEA4231 /* OriginateHTTPLog.h */,
+				213019537E6D8D199DB6CA1C0441D6EA /* OriginateHTTPLog.m */,
+				86EA75EFFEB4B0B50C81FB83FB52421E /* OriginateHTTPLogging.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		0B8A0FC9E640EAB7D493375BE97800C5 /* OriginateHTTP */ = {
 			isa = PBXGroup;
 			children = (
-				11D8C1C99D97445A42A55D1808485F03 /* Pod */,
+				DA9EA1D692A58B759B8DC91A87EF5AE2 /* Pod */,
 				EF72FC4655393AA60CDA1D1BF2174B0A /* Support Files */,
 			);
 			name = OriginateHTTP;
@@ -156,14 +154,6 @@
 			path = "Target Support Files/Pods-OriginateHTTP_Example";
 			sourceTree = "<group>";
 		};
-		11D8C1C99D97445A42A55D1808485F03 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				90D17112F34A0A441A6E6AC84E442AF7 /* Classes */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
 		4B74ABCEE09220F6CFD9B8810F540296 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,7 +165,7 @@
 		53F661C0CA7190D2CF05023FB33D61E4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				3ECD28BCB19DB4B88775AB62BD56006C /* Foundation.framework */,
+				9048568526790353F97941901E9CD308 /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -189,20 +179,6 @@
 				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
 				C3A06B26EF33A00070103A7350BECB37 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		90D17112F34A0A441A6E6AC84E442AF7 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				9FAF65241BAA3B6000655659 /* OriginateHTTP.h */,
-				9FAF65251BAA3B6000655659 /* OriginateHTTPAuthorizedObject.h */,
-				9FAF65261BAA3B6000655659 /* OriginateHTTPClient.h */,
-				9FAF65271BAA3B6000655659 /* OriginateHTTPClient.m */,
-				9FAF65281BAA3B6000655659 /* OriginateHTTPLog.h */,
-				9FAF65291BAA3B6000655659 /* OriginateHTTPLog.m */,
-				9FAF652A1BAA3B6000655659 /* OriginateHTTPLogging.h */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		ABE9E8E416136D1583CB5E47283121E3 /* Pods-OriginateHTTP_Tests */ = {
@@ -243,12 +219,19 @@
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4679C763DB1D794C67A09CD1313C3945 /* OriginateHTTP.bundle */,
-				F8E4234CFDA38C1CDAF2990527CE8853 /* OriginateHTTP.framework */,
+				3DD7BE7E0CD155A27E912E0803666CE7 /* OriginateHTTP.framework */,
 				194C070E65FE016A6331F35390A93B79 /* Pods_OriginateHTTP_Example.framework */,
 				FFA9D9EED242F3BFB195297B41413258 /* Pods_OriginateHTTP_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DA9EA1D692A58B759B8DC91A87EF5AE2 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				017FE4DA34D4AFDB6D31817CF861D717 /* Classes */,
+			);
+			path = Pod;
 			sourceTree = "<group>";
 		};
 		EF72FC4655393AA60CDA1D1BF2174B0A /* Support Files */ = {
@@ -257,10 +240,10 @@
 				3211052B5AA1D399D85B19CDE0811E5C /* Info.plist */,
 				5D496CF59264220A8479164B0A725B05 /* OriginateHTTP.modulemap */,
 				60DB6D7F61B1752DE1DB7D6CE84E774B /* OriginateHTTP.xcconfig */,
-				8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */,
-				DDC6CEA2B5DDF43DFA38B78C88574CE2 /* OriginateHTTP-dummy.m */,
+				64B91FD397341660F0F5C864A4986A8C /* OriginateHTTP-Private.xcconfig */,
+				4F2A14E45D5CE5D968B5DED7F12874A8 /* OriginateHTTP-dummy.m */,
 				5B7C8085D3FE659CE24901A48DCE61F4 /* OriginateHTTP-prefix.pch */,
-				CE575FE4B30235A8679C7D783CD1AF35 /* OriginateHTTP-umbrella.h */,
+				544A843893044F6119FF77E73AD6E7D1 /* OriginateHTTP-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/OriginateHTTP";
@@ -277,16 +260,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B1F55C081C6A5DC4CF820CA86A4D750 /* Headers */ = {
+		4425911383EB95D4FD1514C92A29469B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FAF652F1BAA3B6000655659 /* OriginateHTTPLog.h in Headers */,
-				9FAF65311BAA3B6000655659 /* OriginateHTTPLogging.h in Headers */,
-				9FAF652D1BAA3B6000655659 /* OriginateHTTPClient.h in Headers */,
-				E5414292B07E4DBB5859E2779B50D5E0 /* OriginateHTTP-umbrella.h in Headers */,
-				9FAF652C1BAA3B6000655659 /* OriginateHTTPAuthorizedObject.h in Headers */,
-				9FAF652B1BAA3B6000655659 /* OriginateHTTP.h in Headers */,
+				1D47BF48AA72703CE425CCFEC04DD7AC /* OriginateHTTP-umbrella.h in Headers */,
+				1B54BCDE0F354E52CD3E28101B843BFA /* OriginateHTTP.h in Headers */,
+				209C941902EE133C3A40833F8D4D60AF /* OriginateHTTPAuthorizedObject.h in Headers */,
+				D237934BC176796A5F1B1BDDA3DF1B06 /* OriginateHTTPClient.h in Headers */,
+				60B7CD1D4A155B3825ABE5B6287CBE7D /* OriginateHTTPLog.h in Headers */,
+				8A604B78DF592254ECC680C4AF59BC58 /* OriginateHTTPLogging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,25 +284,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		25D2FB36FD7063A2B3FF2E42B63ADE93 /* OriginateHTTP */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C99E5F45C78C03C2623AC557D0C5473B /* Build configuration list for PBXNativeTarget "OriginateHTTP" */;
-			buildPhases = (
-				F1B4064E75142F0742024F5E947F7A7B /* Sources */,
-				5AB9B3EB253575B9CC1C0BBE52B38508 /* Frameworks */,
-				5E707C935C9272158B53CBA35561616A /* Resources */,
-				5B1F55C081C6A5DC4CF820CA86A4D750 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BF699D12F301FCA36EC57C5FA9E27083 /* PBXTargetDependency */,
-			);
-			name = OriginateHTTP;
-			productName = OriginateHTTP;
-			productReference = F8E4234CFDA38C1CDAF2990527CE8853 /* OriginateHTTP.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		2EDDB436A584E2475F50F4B8A968612D /* Pods-OriginateHTTP_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2272B2BAC4B0C379D39ECD760EB63E0E /* Build configuration list for PBXNativeTarget "Pods-OriginateHTTP_Example" */;
@@ -331,11 +295,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				DEC5B6F6EB3E0CE715826B82FC6B0F14 /* PBXTargetDependency */,
+				FD85F59EFB2C3010A82858EC999B509B /* PBXTargetDependency */,
 			);
 			name = "Pods-OriginateHTTP_Example";
 			productName = "Pods-OriginateHTTP_Example";
 			productReference = 194C070E65FE016A6331F35390A93B79 /* Pods_OriginateHTTP_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		34F485774002BD2BADA7EFE224321B20 /* OriginateHTTP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EB7990565DBA843C7BCA0A04BE64303 /* Build configuration list for PBXNativeTarget "OriginateHTTP" */;
+			buildPhases = (
+				BA35A7AB024D4CF061CA1CC3CD8B629A /* Sources */,
+				66D614CBA5EB62A9F119732CD6969D52 /* Frameworks */,
+				4425911383EB95D4FD1514C92A29469B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OriginateHTTP;
+			productName = OriginateHTTP;
+			productReference = 3DD7BE7E0CD155A27E912E0803666CE7 /* OriginateHTTP.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CAC5597587ABC862B0FFC5571428D29F /* Pods-OriginateHTTP_Tests */ = {
@@ -349,29 +330,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				A041E524B4B92A43088E0EDDBAB33E53 /* PBXTargetDependency */,
+				451244164D9D366FC968783177B34050 /* PBXTargetDependency */,
 			);
 			name = "Pods-OriginateHTTP_Tests";
 			productName = "Pods-OriginateHTTP_Tests";
 			productReference = FFA9D9EED242F3BFB195297B41413258 /* Pods_OriginateHTTP_Tests.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		FFFD3F0086A903C6D8E4CBC09102F5A9 /* OriginateHTTP-OriginateHTTP */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAEE6005F1C8E43969E9239C85C1A366 /* Build configuration list for PBXNativeTarget "OriginateHTTP-OriginateHTTP" */;
-			buildPhases = (
-				69C334E2F8C648514AFAA97A2C549099 /* Sources */,
-				0DBAF5014E757D3AFDFE8AA4E4F6A519 /* Frameworks */,
-				9B4322802616ACDB9573E41D2F7E08EC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "OriginateHTTP-OriginateHTTP";
-			productName = "OriginateHTTP-OriginateHTTP";
-			productReference = 4679C763DB1D794C67A09CD1313C3945 /* OriginateHTTP.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -394,31 +358,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				25D2FB36FD7063A2B3FF2E42B63ADE93 /* OriginateHTTP */,
-				FFFD3F0086A903C6D8E4CBC09102F5A9 /* OriginateHTTP-OriginateHTTP */,
+				34F485774002BD2BADA7EFE224321B20 /* OriginateHTTP */,
 				2EDDB436A584E2475F50F4B8A968612D /* Pods-OriginateHTTP_Example */,
 				CAC5597587ABC862B0FFC5571428D29F /* Pods-OriginateHTTP_Tests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		5E707C935C9272158B53CBA35561616A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96ADAB72303538DE9C3643704551A221 /* OriginateHTTP.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9B4322802616ACDB9573E41D2F7E08EC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		56820437FB9B82EE17D84DAB5AF3B2B0 /* Sources */ = {
@@ -437,43 +382,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		69C334E2F8C648514AFAA97A2C549099 /* Sources */ = {
+		BA35A7AB024D4CF061CA1CC3CD8B629A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F1B4064E75142F0742024F5E947F7A7B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9C9AA307EED56E83BD4C04FC46988D4 /* OriginateHTTP-dummy.m in Sources */,
-				9FAF65301BAA3B6000655659 /* OriginateHTTPLog.m in Sources */,
-				9FAF652E1BAA3B6000655659 /* OriginateHTTPClient.m in Sources */,
+				E1E3EA91827100F9BDA238E5B6206685 /* OriginateHTTP-dummy.m in Sources */,
+				15DAAF9CA1A6C49D6AC19BF8380FF987 /* OriginateHTTPClient.m in Sources */,
+				4AE5C2CE900C2381EA802101D502A250 /* OriginateHTTPLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A041E524B4B92A43088E0EDDBAB33E53 /* PBXTargetDependency */ = {
+		451244164D9D366FC968783177B34050 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OriginateHTTP;
-			target = 25D2FB36FD7063A2B3FF2E42B63ADE93 /* OriginateHTTP */;
-			targetProxy = 5BE1B9CA075BAEA9EA9833A21082D293 /* PBXContainerItemProxy */;
+			target = 34F485774002BD2BADA7EFE224321B20 /* OriginateHTTP */;
+			targetProxy = 638224BE7BCA4D0E5F151EC2999DDA98 /* PBXContainerItemProxy */;
 		};
-		BF699D12F301FCA36EC57C5FA9E27083 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "OriginateHTTP-OriginateHTTP";
-			target = FFFD3F0086A903C6D8E4CBC09102F5A9 /* OriginateHTTP-OriginateHTTP */;
-			targetProxy = 73F90AE4008DD0538550E32BF735AE0F /* PBXContainerItemProxy */;
-		};
-		DEC5B6F6EB3E0CE715826B82FC6B0F14 /* PBXTargetDependency */ = {
+		FD85F59EFB2C3010A82858EC999B509B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OriginateHTTP;
-			target = 25D2FB36FD7063A2B3FF2E42B63ADE93 /* OriginateHTTP */;
-			targetProxy = 44555D122FC7CA58ECF795A976AFF204 /* PBXContainerItemProxy */;
+			target = 34F485774002BD2BADA7EFE224321B20 /* OriginateHTTP */;
+			targetProxy = E6D61207D3C173406A3D8847D9A2B75D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -551,18 +483,6 @@
 			};
 			name = Debug;
 		};
-		33A6BC0AC40BBDA7EA4626D448CDEBBD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = OriginateHTTP;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		3FB9DC1E5882F974BD198C278279B77E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F561B9D890E6203BAD93847711F2598 /* Pods-OriginateHTTP_Tests.release.xcconfig */;
@@ -618,45 +538,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6B67E116A50558669F44D8873AC03BBA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.1.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.1.0;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/OriginateHTTP/OriginateHTTP-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/OriginateHTTP/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/OriginateHTTP/OriginateHTTP.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = OriginateHTTP;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		77AC2447196CDD0357AA5578AFD639CB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = OriginateHTTP;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -718,9 +599,9 @@
 			};
 			name = Debug;
 		};
-		D6A8FEFAF9A1B70D6C7587507EBE7A72 /* Debug */ = {
+		D54202664A08B279247F7E72E9D92E56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F8324B59D42B1BC1E4C0AB589C767C7 /* OriginateHTTP-Private.xcconfig */;
+			baseConfigurationReference = 64B91FD397341660F0F5C864A4986A8C /* OriginateHTTP-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.1.0;
@@ -745,9 +626,45 @@
 			};
 			name = Debug;
 		};
+		EB98B9BC9C09A2B952CCFE8AB2F1EA68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64B91FD397341660F0F5C864A4986A8C /* OriginateHTTP-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.1.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.1.0;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OriginateHTTP/OriginateHTTP-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/OriginateHTTP/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/OriginateHTTP/OriginateHTTP.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = OriginateHTTP;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0EB7990565DBA843C7BCA0A04BE64303 /* Build configuration list for PBXNativeTarget "OriginateHTTP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D54202664A08B279247F7E72E9D92E56 /* Debug */,
+				EB98B9BC9C09A2B952CCFE8AB2F1EA68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		15CA35483046FBCB024B358304E5DD38 /* Build configuration list for PBXNativeTarget "Pods-OriginateHTTP_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -771,24 +688,6 @@
 			buildConfigurations = (
 				0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */,
 				03CA91998D6773EC5D02B3DB87B8353E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AAEE6005F1C8E43969E9239C85C1A366 /* Build configuration list for PBXNativeTarget "OriginateHTTP-OriginateHTTP" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				33A6BC0AC40BBDA7EA4626D448CDEBBD /* Debug */,
-				77AC2447196CDD0357AA5578AFD639CB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C99E5F45C78C03C2623AC557D0C5473B /* Build configuration list for PBXNativeTarget "OriginateHTTP" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6A8FEFAF9A1B70D6C7587507EBE7A72 /* Debug */,
-				6B67E116A50558669F44D8873AC03BBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,13 +17,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    NSURL *URL = [NSURL URLWithString:@"https://www.apple.com/"];
+    
+    OriginateHTTPClient *httpClient = [[OriginateHTTPClient alloc] initWithBaseURL:URL
+                                                                  authorizedObject:nil];
+    
+    [httpClient GETResource:@"robots.txt" response:^(id response, NSError *error) {
+        NSLog(@"response = %@", response);
+    }];
 }
 
 @end
