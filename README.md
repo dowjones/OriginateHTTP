@@ -1,28 +1,80 @@
 # OriginateHTTP
 
-[![CI Status](http://img.shields.io/travis/Allen Wu/OriginateHTTP.svg?style=flat)](https://travis-ci.org/Allen Wu/OriginateHTTP)
-[![Version](https://img.shields.io/cocoapods/v/OriginateHTTP.svg?style=flat)](http://cocoapods.org/pods/OriginateHTTP)
-[![License](https://img.shields.io/cocoapods/l/OriginateHTTP.svg?style=flat)](http://cocoapods.org/pods/OriginateHTTP)
-[![Platform](https://img.shields.io/cocoapods/p/OriginateHTTP.svg?style=flat)](http://cocoapods.org/pods/OriginateHTTP)
+[![CI Status](http://img.shields.io/travis/originate/OriginateHTTP.svg?style=flat)](https://travis-ci.org/originate/OriginateHTTP)
 
-## Usage
+> A lightweight HTTP networking client backed by NSURLSession.
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Installation with CocoaPods
+
+Add the following lines to your Podfile and then run `pod install`.
+
+```ruby
+source 'https://github.com/Originate/CocoaPods.git'
+pod 'Originate+OriginateHTTP'
+```
+
 
 ## Requirements
 
-## Installation
+* iOS 7.0+
 
-OriginateHTTP is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
 
-```ruby
-pod "OriginateHTTP"
+## Usage
+
+### Basic HTTP
+
+```objc
+NSURL *URL = [NSURL URLWithString:@"https://www.apple.com/"];
+
+OriginateHTTPClient *HTTPClient = [[OriginateHTTPClient alloc] initWithBaseURL:URL
+                                                              authorizedObject:nil];
+
+// perform GET on www.apple.com/robots.txt
+[HTTPClient GETResource:@"robots.txt" 
+               response:^(id response, NSError *error)  {
+    NSLog(@"response = %@", response);
+}];
 ```
 
-## Author
+Other HTTP methods are supported as well:
 
-Allen Wu, allen.wu@originate.com
+```objc
+- (void)GETResource:(NSString *)URI
+            headers:(NSDictionary *)headers
+           response:(OriginateHTTPClientResponse)responseBlock;
+
+- (void)GETResource:(NSString *)URI
+           response:(OriginateHTTPClientResponse)responseBlock;
+
+- (void)POSTResource:(NSString *)URI
+             payload:(NSData *)body
+            response:(OriginateHTTPClientResponse)responseBlock;
+
+- (void)PATCHResource:(NSString *)URI
+         deltaPayload:(NSData *)payload
+             response:(OriginateHTTPClientResponse)responseBlock;
+
+- (void)PUTResource:(NSString *)URI
+            payload:(NSData *)payload
+           response:(OriginateHTTPClientResponse)responseBlock;
+
+- (void)DELETEResource:(NSString *)URI
+              response:(OriginateHTTPClientResponse)responseBlock;
+```
+
+
+### Authorization
+
+Any additional headers necessary for authorization can be passed into the `OriginateHTTPClient` via an object conforming to `<OriginateHTTPAuthorizedObject>`.
+
+All requests made thereafter will automatically include the appropriate headers.
+
+
+### Logging
+
+Log responses by listening to `OriginateHTTPClientResponseNotification`. The notification will include an object conforming to `<OriginateHTTPLogging>`.
+
 
 ## License
 
