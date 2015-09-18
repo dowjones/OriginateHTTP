@@ -1,6 +1,6 @@
 # OriginateHTTP
 
-[![CI Status](http://img.shields.io/travis/originate/OriginateHTTP.svg?style=flat)](https://travis-ci.org/originate/OriginateHTTP)
+[![CI Status](http://img.shields.io/travis/Originate/OriginateHTTP.svg?style=flat)](https://travis-ci.org/Originate/OriginateHTTP)
 
 > A lightweight HTTP networking client backed by NSURLSession.
 
