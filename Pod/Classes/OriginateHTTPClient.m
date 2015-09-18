@@ -193,7 +193,9 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                 id result;
                 
                 if (HTTPResponse.statusCode >= 200 && HTTPResponse.statusCode <= 299) {
-                    if ([HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/json"]) {
+                    if ([HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/json"] ||
+                        [HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/vnd.api+json"])
+                    {
                         result = [NSJSONSerialization JSONObjectWithData:data
                                                                  options:NSJSONReadingAllowFragments
                                                                    error:&error];
