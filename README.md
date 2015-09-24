@@ -11,7 +11,7 @@ Add the following lines to your Podfile and then run `pod install`.
 
 ```ruby
 source 'https://github.com/Originate/CocoaPods.git'
-pod 'Originate+HTTP'
+pod 'OriginateHTTP'
 ```
 
 
