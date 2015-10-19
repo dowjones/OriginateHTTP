@@ -193,6 +193,12 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                 id result;
                 
                 if (HTTPResponse.statusCode >= 200 && HTTPResponse.statusCode <= 299) {
+                    
+                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
+                        responseBlock(nil, nil);
+                        return;
+                    }
+                    
                     if ([HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/json"] ||
                         [HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/vnd.api+json"])
                     {
@@ -311,6 +317,11 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
+                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
+                    responseBlock(nil, nil);
+                    return;
+                }
+                
                 NSDictionary *responseBody = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:NSJSONReadingAllowFragments
                                                                                error:&error];
@@ -372,15 +383,18 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
+                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
+                    responseBlock(nil, nil);
+                    return;
+                }
+                
                 id result = nil;
                 
-                if ([data length] != 0) {
-                    NSDictionary *decodedResult = [NSJSONSerialization JSONObjectWithData:data
-                                                                                  options:NSJSONReadingAllowFragments
-                                                                                    error:&error];
-                    if (!error) {
-                        result = decodedResult;
-                    }
+                NSDictionary *decodedResult = [NSJSONSerialization JSONObjectWithData:data
+                                                                              options:NSJSONReadingAllowFragments
+                                                                                error:&error];
+                if (!error) {
+                    result = decodedResult;
                 }
                 
                 OriginateHTTPLog* log = [[OriginateHTTPLog alloc] initWithURLResponse:response
@@ -427,6 +441,11 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
+                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
+                    responseBlock(nil, nil);
+                    return;
+                }
+                
                 NSError *jsonError;
                 NSDictionary *responseBody = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:NSJSONReadingAllowFragments
@@ -447,6 +466,22 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
     
     [task resume];
 }
+
+
+#pragma mark - Empty HTTP body
+
++ (BOOL)emptyBodyAcceptableForHTTPResponse:(NSHTTPURLResponse *)HTTPResponse
+{
+    switch (HTTPResponse.statusCode) {
+        case 201:
+        case 202:
+        case 204:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
 
 #pragma mark - Errors
 
