@@ -210,10 +210,6 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                         result = [[NSString alloc] initWithData:data
                                                        encoding:NSUTF8StringEncoding];
                     }
-                    
-                    if (error) {
-                        error = [[self class] HTTPError500InternalServer]; // Server provided us with malformed data.
-                    }
                 }
                 
                 OriginateHTTPLog *log = [[OriginateHTTPLog alloc] initWithURLResponse:response
