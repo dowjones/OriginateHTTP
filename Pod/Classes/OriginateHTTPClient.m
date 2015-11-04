@@ -194,8 +194,13 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                 
                 if (HTTPResponse.statusCode >= 200 && HTTPResponse.statusCode <= 299) {
                     
-                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
-                        responseBlock(nil, nil);
+                    if (data.length == 0) {
+                        if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
+                            responseBlock(nil, nil);
+                        }
+                        else {
+                            responseBlock(nil, [self errorEmptyResponse]);
+                        }
                         return;
                     }
                     
@@ -313,8 +318,13 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
-                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
-                    responseBlock(nil, nil);
+                if (data.length == 0) {
+                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
+                        responseBlock(nil, nil);
+                    }
+                    else {
+                        responseBlock(nil, [self errorEmptyResponse]);
+                    }
                     return;
                 }
                 
@@ -379,8 +389,13 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
-                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
-                    responseBlock(nil, nil);
+                if (data.length == 0) {
+                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
+                        responseBlock(nil, nil);
+                    }
+                    else {
+                        responseBlock(nil, [self errorEmptyResponse]);
+                    }
                     return;
                 }
                 
@@ -437,8 +452,13 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                     return;
                 }
                 
-                if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse] && data.length == 0) {
-                    responseBlock(nil, nil);
+                if (data.length == 0) {
+                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
+                        responseBlock(nil, nil);
+                    }
+                    else {
+                        responseBlock(nil, [self errorEmptyResponse]);
+                    }
                     return;
                 }
                 
@@ -518,6 +538,13 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
 + (NSString *)errorDomain
 {
     return @"com.originate.networking";
+}
+
++ (NSError *)errorEmptyResponse
+{
+    return [NSError errorWithDomain:[[self class] errorDomain]
+                               code:3
+                           userInfo:@{ NSLocalizedDescriptionKey : @"The response was empty." }];
 }
 
 + (NSError *)errorDecodingJSON
