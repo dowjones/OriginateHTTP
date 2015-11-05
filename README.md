@@ -17,7 +17,7 @@ pod 'OriginateHTTP'
 
 ## Requirements
 
-* iOS 7.0+
+* iOS 8.0+
 
 
 ## Usage

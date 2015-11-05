@@ -23,6 +23,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		F918BFA11BEBF0B20013D954 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F918BFA01BEBF0B20013D954 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		94D5246AC50CC2F69CCEC46A /* Pods_OriginateHTTP_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OriginateHTTP_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0BDBB58CEFF7E85A157748F /* Pods-OriginateHTTP_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OriginateHTTP_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OriginateHTTP_Example/Pods-OriginateHTTP_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DB4CCDAD9C6A9D910577B503 /* OriginateHTTP.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = OriginateHTTP.podspec; path = ../OriginateHTTP.podspec; sourceTree = "<group>"; };
+		F918BFA01BEBF0B20013D954 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				6003F59C195388D20070C39A /* OriginateAppDelegate.h */,
 				6003F59D195388D20070C39A /* OriginateAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				F918BFA01BEBF0B20013D954 /* Launch Screen.storyboard */,
 				6003F5A5195388D20070C39A /* OriginateViewController.h */,
 				6003F5A6195388D20070C39A /* OriginateViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -278,6 +281,7 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				F918BFA11BEBF0B20013D954 /* Launch Screen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,7 +503,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -511,10 +515,10 @@
 			baseConfigurationReference = B0BDBB58CEFF7E85A157748F /* Pods-OriginateHTTP_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OriginateHTTP/OriginateHTTP-Prefix.pch";
 				INFOPLIST_FILE = "OriginateHTTP/OriginateHTTP-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -526,10 +530,10 @@
 			baseConfigurationReference = 65F180D6FA751584F4FDE1A0 /* Pods-OriginateHTTP_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OriginateHTTP/OriginateHTTP-Prefix.pch";
 				INFOPLIST_FILE = "OriginateHTTP/OriginateHTTP-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

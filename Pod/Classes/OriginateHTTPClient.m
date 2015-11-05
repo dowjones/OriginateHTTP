@@ -10,7 +10,10 @@
 #import "OriginateHTTPAuthorizedObject.h"
 #import "OriginateHTTPLog.h"
 
-NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-client.response";
+NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-client.response";
+
+#define EXEC_BLOCK_SAFELY(block, ...) (block ? block(__VA_ARGS__) : nil)
+#define EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(block, ...) if (block) { dispatch_async(dispatch_get_main_queue(), ^{ block(__VA_ARGS__); }); }
 
 @implementation OriginateHTTPClient
 
@@ -31,7 +34,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
 - (NSTimeInterval)timeoutInterval
 {
     if (_timeoutInterval == 0) {
-        _timeoutInterval = 30.0;
+        _timeoutInterval = 45.0;
     }
 
     return _timeoutInterval;
@@ -49,13 +52,10 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                       baseURL:self.baseURL
                        config:configuration
                       timeout:self.timeoutInterval
-                     response:^(id resource, NSError *error) {
-                         if (responseBlock) {
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 responseBlock(resource, error);
-                             });
-                         }
-                     }];
+                     response:^(id resource, NSError *error)
+     {
+         EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
+     }];
 }
 
 - (void)GETResource:(NSString *)URI
@@ -73,19 +73,16 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.allowsCellularAccess = YES;
     configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
-
+    
     [[self class] POSTResource:URI
                        baseURL:self.baseURL
                         config:configuration
                        timeout:self.timeoutInterval
                        payload:body
-                      response:^(id resource, NSError *error) {
-                          if (responseBlock) {
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  responseBlock(resource, error);
-                              });
-                          }
-                      }];
+                      response:^(id resource, NSError *error)
+     {
+         EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
+     }];
 }
 
 - (void)PATCHResource:(NSString *)URI
@@ -95,7 +92,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.allowsCellularAccess = YES;
     configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
-
+    
     [[self class] PATCHResource:URI
                         baseURL:self.baseURL
                          config:configuration
@@ -103,11 +100,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                         payload:body
                        response:^(id resource, NSError *error)
      {
-         if (responseBlock) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 responseBlock(resource, error);
-             });
-         }
+         EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
      }];
 }
 
@@ -127,11 +120,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                       payload:payload
                      response:^(id resource, NSError *error)
      {
-         if (responseBlock) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 responseBlock(resource, error);
-             });
-         }
+         EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
      }];
 
 }
@@ -149,11 +138,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                          timeout:self.timeoutInterval
                         response:^(id resource, NSError *error)
      {
-         if (responseBlock) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 responseBlock(resource, error);
-             });
-         }
+         EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
      }];
 }
 
@@ -173,57 +158,19 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
     NSURLRequest *request = [NSURLRequest requestWithURL:URL
                                              cachePolicy:NSURLRequestReloadRevalidatingCacheData
                                          timeoutInterval:timeout];
+    
     task = [session dataTaskWithRequest:request
                       completionHandler:^(NSData *data,
                                           NSURLResponse *response,
                                           NSError *responseError)
             {
-                if (!responseBlock) {
-                    return;
-                }
-                NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-                
-                NSError *error = [self errorForResponse:HTTPResponse connectionError:responseError];
-                
-                if (error) {
-                    responseBlock(nil, error);
-                    return;
-                }
-                
-                id result;
-                
-                if (HTTPResponse.statusCode >= 200 && HTTPResponse.statusCode <= 299) {
-                    
-                    if (data.length == 0) {
-                        if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
-                            responseBlock(nil, nil);
-                        }
-                        else {
-                            responseBlock(nil, [self errorEmptyResponse]);
-                        }
-                        return;
-                    }
-                    
-                    if ([HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/json"] ||
-                        [HTTPResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/vnd.api+json"])
-                    {
-                        result = [NSJSONSerialization JSONObjectWithData:data
-                                                                 options:NSJSONReadingAllowFragments
-                                                                   error:&error];
-                    }
-                    else {
-                        result = [[NSString alloc] initWithData:data
-                                                       encoding:NSUTF8StringEncoding];
-                    }
-                }
-                
-                OriginateHTTPLog *log = [[OriginateHTTPLog alloc] initWithURLResponse:response
-                                                                       responseObject:result];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
-                                                                    object:log];
-                responseBlock(result, error);
+                [[self class] handleResponse:response
+                                        data:data
+                                       error:responseError
+                      evaluateLocationHeader:NO
+                                  completion:responseBlock];
             }];
-
+    
     [task resume];
 }
 
@@ -253,28 +200,11 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                                           NSURLResponse *response,
                                           NSError *responseError)
             {
-                if (!responseBlock) {
-                    return;
-                }
-                
-                NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-                
-                NSError *error = [[self class] errorForResponse:HTTPResponse
-                                                connectionError:responseError];
-                
-                if (error) {
-                    responseBlock(nil, error);
-                    return;
-                }
-                
-                NSString *resourceLocation = HTTPResponse.allHeaderFields[@"Location"];
-                
-                OriginateHTTPLog* log = [[OriginateHTTPLog alloc] initWithURLResponse:response
-                                                                       responseObject:resourceLocation];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
-                                                                    object:log];
-                
-                responseBlock(resourceLocation, nil);
+                [[self class] handleResponse:response
+                                        data:data
+                                       error:responseError
+                      evaluateLocationHeader:YES
+                                  completion:responseBlock];
             }];
     
     [task resume];
@@ -306,42 +236,11 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                                           NSURLResponse *response,
                                           NSError *responseError)
             {
-                if (!responseBlock) {
-                    return;
-                }
-                
-                NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-                NSError *error = [self errorForResponse:HTTPResponse connectionError:responseError];
-                
-                if (error) {
-                    responseBlock(nil, error);
-                    return;
-                }
-                
-                if (data.length == 0) {
-                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
-                        responseBlock(nil, nil);
-                    }
-                    else {
-                        responseBlock(nil, [self errorEmptyResponse]);
-                    }
-                    return;
-                }
-                
-                NSDictionary *responseBody = [NSJSONSerialization JSONObjectWithData:data
-                                                                             options:NSJSONReadingAllowFragments
-                                                                               error:&error];
-                
-                if (error) {
-                    responseBlock(nil, [[self class] HTTPError500InternalServer]);
-                    return;
-                }
-                
-                OriginateHTTPLog* log = [[OriginateHTTPLog alloc] initWithURLResponse:response
-                                                                       responseObject:responseBody];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
-                                                                    object:log];
-                responseBlock(responseBody, nil);
+                [[self class] handleResponse:response
+                                        data:data
+                                       error:responseError
+                      evaluateLocationHeader:NO
+                                  completion:responseBlock];
             }];
 
     [task resume];
@@ -375,44 +274,11 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                                           NSURLResponse *response,
                                           NSError *responseError)
             {
-                if (!responseBlock) {
-                    return;
-                }
-                
-                NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-                
-                NSError *error = [[self class] errorForResponse:HTTPResponse
-                                                connectionError:responseError];
-                
-                if (error) {
-                    responseBlock(nil, error);
-                    return;
-                }
-                
-                if (data.length == 0) {
-                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
-                        responseBlock(nil, nil);
-                    }
-                    else {
-                        responseBlock(nil, [self errorEmptyResponse]);
-                    }
-                    return;
-                }
-                
-                id result = nil;
-                
-                NSDictionary *decodedResult = [NSJSONSerialization JSONObjectWithData:data
-                                                                              options:NSJSONReadingAllowFragments
-                                                                                error:&error];
-                if (!error) {
-                    result = decodedResult;
-                }
-                
-                OriginateHTTPLog* log = [[OriginateHTTPLog alloc] initWithURLResponse:response
-                                                                       responseObject:result];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
-                                                                    object:log];
-                responseBlock(result, error);
+                [[self class] handleResponse:response
+                                        data:data
+                                       error:responseError
+                      evaluateLocationHeader:NO
+                                  completion:responseBlock];
             }];
     
     [task resume];
@@ -440,51 +306,77 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                                           NSURLResponse *response,
                                           NSError *responseError)
             {
-                if (!responseBlock) {
-                    return;
-                }
-                
-                NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-                NSError *error = [[self class] errorForResponse:HTTPResponse connectionError:responseError];
-                
-                if (error) {
-                    responseBlock(nil, error);
-                    return;
-                }
-                
-                if (data.length == 0) {
-                    if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
-                        responseBlock(nil, nil);
-                    }
-                    else {
-                        responseBlock(nil, [self errorEmptyResponse]);
-                    }
-                    return;
-                }
-                
-                NSError *jsonError;
-                NSDictionary *responseBody = [NSJSONSerialization JSONObjectWithData:data
-                                                                             options:NSJSONReadingAllowFragments
-                                                                               error:&jsonError];
-                
-                if (jsonError) {
-                    responseBlock(nil, [[self class] HTTPError500InternalServer]);
-                    return;
-                }
-                
-                OriginateHTTPLog* log = [[OriginateHTTPLog alloc] initWithURLResponse:response
-                                                                       responseObject:responseBody];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
-                                                                    object:log];
-                
-                responseBlock(responseBody, nil);
+                [[self class] handleResponse:response
+                                        data:data
+                                       error:responseError
+                      evaluateLocationHeader:NO
+                                  completion:responseBlock];
             }];
     
     [task resume];
 }
 
-
-#pragma mark - Empty HTTP body
++ (void)handleResponse:(NSURLResponse *)response
+                  data:(NSData *)data
+                 error:(NSError *)responseError
+evaluateLocationHeader:(BOOL)evaluateLocationHeader
+            completion:(OriginateHTTPClientResponse)responseBlock
+{
+    NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+    NSError *error = [self errorForResponse:HTTPResponse connectionError:responseError];
+    NSString *rawResponseString = data.length > 0 ? [[NSString alloc] initWithData:data
+                                                                          encoding:NSUTF8StringEncoding] : nil;
+    id result = rawResponseString;
+    
+    OriginateHTTPLog *log = [[OriginateHTTPLog alloc] initWithURLResponse:response
+                                                           responseObject:result];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OriginateHTTPClientResponseNotification
+                                                        object:log];
+    
+    if (!responseBlock) {
+        return;
+    }
+    
+    if (error || HTTPResponse.statusCode < 200 || HTTPResponse.statusCode > 299) {
+        EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, rawResponseString, error);
+        return;
+    }
+    
+    if (data.length == 0) {
+        if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
+            EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, nil, nil);
+        }
+        else {
+            EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, nil, [self errorEmptyResponse]);
+        }
+        return;
+    }
+    
+    if (([HTTPResponse.allHeaderFields[@"Content-Type"] containsString:@"application/json"] ||
+         [HTTPResponse.allHeaderFields[@"Content-Type"] containsString:@"application/vnd.api+json"]) &&
+        data.length > 0) {
+        result = [NSJSONSerialization JSONObjectWithData:data
+                                                 options:NSJSONReadingAllowFragments
+                                                   error:&error];
+        
+        if (error) {
+            error = [[self class] errorDecodingJSON];
+        }
+    }
+    else {
+        result = [[NSString alloc] initWithData:data
+                                       encoding:NSUTF8StringEncoding];
+    }
+    
+    if (evaluateLocationHeader) {
+        NSString *resourceLocation = HTTPResponse.allHeaderFields[@"Location"];
+        
+        // Prefer the body (if present) over the location header.
+        result = result ?: resourceLocation;
+    }
+    
+    EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, result, error);
+}
 
 + (BOOL)emptyBodyAcceptableForHTTPResponse:(NSHTTPURLResponse *)HTTPResponse
 {
@@ -510,26 +402,12 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
     if (statusCode >= 200 && statusCode <= 299) { // Success Range. No error.
         return nil;
     }
-    else if (statusCode == 401) {
-        error = [[self class] HTTPError401Unauthorized];
-    }
-    else if (statusCode == 403) {
-        error = [[self class] HTTPError403Forbidden];
-    }
-    else if (statusCode == 409) {
-        error = [[self class] HTTPError409Conflict];
-    }
-    else if (statusCode >= 500 && statusCode <= 599) {
-        error = [[self class] HTTPError500InternalServer];
-    }
     else if (responseError.code == kCFURLErrorTimedOut) {
         error = [[self class] errorTimeout];
     }
-    else if (responseError) {
-        error = responseError;
-    }
     else {
-        error = [[self class] unknownErrorWithResponseHeader:HTTPResponse];
+        error = [[self class] HTTPErrorForCode:statusCode
+                           withUnderlyingError:responseError];
     }
     
     return error;
@@ -551,15 +429,7 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
 {
     return [NSError errorWithDomain:[[self class] errorDomain]
                                code:2
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The server's response cannot be processed." }];
-}
-
-+ (NSError *)unknownErrorWithResponseHeader:(NSHTTPURLResponse *)response
-{
-    return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:-1
-                           userInfo:@{ NSLocalizedDescriptionKey : @"An unknown error occured.",
-                                       @"http_response" : response }];
+                           userInfo:@{ NSLocalizedDescriptionKey : @"The server's response cannot be processed (Invalid JSON)." }];
 }
 
 + (NSError *)errorTimeout
@@ -569,41 +439,31 @@ NSString* const OriginateHTTPClientResponseNotification = @"com.originate.http-c
                            userInfo:@{ NSLocalizedDescriptionKey : @"The request timed out. Please check your internet connection." }];
 }
 
-// HTTP Errors
-
-+ (NSError *)HTTPError400BadData
++ (NSError *)HTTPErrorForCode:(NSUInteger)code withUnderlyingError:(NSError *)error
 {
+    NSString *descriptionForErrorCode = [[self class] descriptionForErrorCode:code];
     return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:400
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The request could not be understood by the server due to malformed syntax." }];
+                               code:code
+                           userInfo:@{ NSLocalizedDescriptionKey : descriptionForErrorCode,
+                                       @"underlyingError" : error }];
 }
 
-+ (NSError *)HTTPError401Unauthorized
++ (NSString *)descriptionForErrorCode:(NSUInteger)code
 {
-    return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:401
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The request requires user authentication." }];
-}
-
-+ (NSError *)HTTPError403Forbidden
-{
-    return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:403
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The server understood the request, but is refusing to fulfill it." }];
-}
-
-+ (NSError *)HTTPError409Conflict
-{
-    return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:409
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The request could not be completed due to a conflict with the current state of the resource." }];
-}
-
-+ (NSError *)HTTPError500InternalServer
-{
-    return [NSError errorWithDomain:[[self class] errorDomain]
-                               code:500
-                           userInfo:@{ NSLocalizedDescriptionKey : @"The server encountered an unexpected condition which prevented it from fulfilling the request." }];
+    switch (code) {
+        case 400:
+            return @"The request could not be understood by the server due to malformed syntax.";
+        case 401:
+            return @"The request requires user authentication.";
+        case 403:
+            return @"The server understood the request, but is refusing to fulfill it.";
+        case 409:
+            return @"The request could not be completed due to a conflict with the current state of the resource.";
+        case 500:
+            return @"The server encountered an unexpected condition which prevented it from fulfilling the request.";
+        default:
+            return @"An unknown error occured";
+    }
 }
 
 @end

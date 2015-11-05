@@ -10,7 +10,7 @@
 
 @interface OriginateHTTPLog ()
 
-@property (nonatomic, strong) NSURLResponse* urlResponse;
+@property (nonatomic, strong) NSURLResponse *urlResponse;
 @property (nonatomic, strong) id responseObject;
 
 @end
@@ -20,12 +20,12 @@
 - (instancetype)initWithURLResponse:(NSURLResponse *)urlResponse
                      responseObject:(id)responseObject
 {
-  self = [super init];
-  if (self) {
-    _urlResponse = urlResponse;
-    _responseObject = responseObject;
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        _urlResponse = urlResponse;
+        _responseObject = responseObject;
+    }
+    return self;
 }
 
 #pragma mark - OriginateHTTPLogging
