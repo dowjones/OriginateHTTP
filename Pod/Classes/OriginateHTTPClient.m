@@ -442,10 +442,16 @@ evaluateLocationHeader:(BOOL)evaluateLocationHeader
 + (NSError *)HTTPErrorForCode:(NSUInteger)code withUnderlyingError:(NSError *)error
 {
     NSString *descriptionForErrorCode = [[self class] descriptionForErrorCode:code];
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : descriptionForErrorCode };
+    
+    if (error) {
+        userInfo = @{ NSLocalizedDescriptionKey : descriptionForErrorCode,
+                      @"underlyingError" : error };
+    }
+    
     return [NSError errorWithDomain:[[self class] errorDomain]
                                code:code
-                           userInfo:@{ NSLocalizedDescriptionKey : descriptionForErrorCode,
-                                       @"underlyingError" : error }];
+                           userInfo:userInfo];
 }
 
 + (NSString *)descriptionForErrorCode:(NSUInteger)code
