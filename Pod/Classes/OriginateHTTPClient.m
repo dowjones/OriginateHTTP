@@ -40,17 +40,65 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     return _timeoutInterval;
 }
 
-- (void)GETResource:(NSString *)URI
-            headers:(NSDictionary *)headers
-           response:(OriginateHTTPClientResponse)responseBlock
+- (NSString *)userAgent
+{
+    if (!_userAgent) {
+        _userAgent = @"OriginateHTTP/0.1 (iPhone; iOS 8_0+)";
+    }
+    
+    return _userAgent;
+}
+
+- (NSDictionary *)baseHeaders
+{
+    NSDictionary *authorizationHeader = [self.authorizedObject authorizationHeader];
+    NSMutableDictionary *headers = [@{ @"User-Agent" : self.userAgent,
+                                       @"Accept" : @"application/json",
+                                       @"Content-Type" : @"application/json" } mutableCopy];
+    [headers addEntriesFromDictionary:authorizationHeader];
+    
+    return [headers copy];
+}
+
+- (NSDictionary *)baseHeadersWithAdditionalHeaders:(NSDictionary *)additional
+{
+    if (additional.count == 0) {
+        return self.baseHeaders;
+    }
+    
+    NSMutableDictionary *headers = [self.baseHeaders mutableCopy];
+    [headers addEntriesFromDictionary:additional];
+    return [headers copy];
+}
+
+- (NSURLSessionConfiguration *)sessionConfigurationWithHeaders:(NSDictionary *)headers
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.allowsCellularAccess = YES;
     configuration.HTTPAdditionalHeaders = headers;
+    return configuration;
+}
+
+#pragma mark - OriginateHTTPClient (API)
+
+// GET
+
+- (void)GETResource:(NSString *)URI
+           response:(OriginateHTTPClientResponse)responseBlock
+{
+    [self GETResource:URI additionalHeaders:nil response:responseBlock];
+}
+
+- (void)GETResource:(NSString *)URI
+  additionalHeaders:(NSDictionary *)additionalHeaders
+           response:(OriginateHTTPClientResponse)responseBlock
+{
+    NSDictionary *headers = [self baseHeadersWithAdditionalHeaders:additionalHeaders];
+    NSURLSessionConfiguration *config = [self sessionConfigurationWithHeaders:headers];
 
     [[self class] GETResource:URI
                       baseURL:self.baseURL
-                       config:configuration
+                       config:config
                       timeout:self.timeoutInterval
                      response:^(id resource, NSError *error)
      {
@@ -58,25 +106,26 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
      }];
 }
 
-- (void)GETResource:(NSString *)URI
-           response:(OriginateHTTPClientResponse)responseBlock
-{
-    [self GETResource:URI
-              headers:[self.authorizedObject authorizationHeader]
-             response:responseBlock];
-}
+// POST
 
 - (void)POSTResource:(NSString *)URI
              payload:(NSData *)body
             response:(OriginateHTTPClientResponse)responseBlock
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.allowsCellularAccess = YES;
-    configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
-    
+    [self POSTResource:URI additionalHeaders:nil payload:body response:responseBlock];
+}
+
+- (void)POSTResource:(NSString *)URI
+   additionalHeaders:(NSDictionary *)additionalHeaders
+             payload:(NSData *)body
+            response:(OriginateHTTPClientResponse)responseBlock
+{
+    NSDictionary *headers = [self baseHeadersWithAdditionalHeaders:additionalHeaders];
+    NSURLSessionConfiguration *config = [self sessionConfigurationWithHeaders:headers];
+
     [[self class] POSTResource:URI
                        baseURL:self.baseURL
-                        config:configuration
+                        config:config
                        timeout:self.timeoutInterval
                        payload:body
                       response:^(id resource, NSError *error)
@@ -85,17 +134,26 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
      }];
 }
 
+// PATCH
+
 - (void)PATCHResource:(NSString *)URI
+         deltaPayload:(NSData *)payload
+             response:(OriginateHTTPClientResponse)responseBlock
+{
+    [self PATCHResource:URI additionalHeaders:nil deltaPayload:payload response:responseBlock];
+}
+
+- (void)PATCHResource:(NSString *)URI
+    additionalHeaders:(NSDictionary *)additionalHeaders
          deltaPayload:(NSData *)body
              response:(OriginateHTTPClientResponse)responseBlock
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.allowsCellularAccess = YES;
-    configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
+    NSDictionary *headers = [self baseHeadersWithAdditionalHeaders:additionalHeaders];
+    NSURLSessionConfiguration *config = [self sessionConfigurationWithHeaders:headers];
     
     [[self class] PATCHResource:URI
                         baseURL:self.baseURL
-                         config:configuration
+                         config:config
                         timeout:self.timeoutInterval
                         payload:body
                        response:^(id resource, NSError *error)
@@ -104,37 +162,52 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
      }];
 }
 
+// PUT
 
 - (void)PUTResource:(NSString *)URI
             payload:(NSData *)payload
            response:(OriginateHTTPClientResponse)responseBlock
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.allowsCellularAccess = YES;
-    configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
+    [self PUTResource:URI additionalHeaders:nil payload:payload response:responseBlock];
+}
 
+- (void)PUTResource:(NSString *)URI
+  additionalHeaders:(NSDictionary *)additionalHeaders
+            payload:(NSData *)payload
+           response:(OriginateHTTPClientResponse)responseBlock
+{
+    NSDictionary *headers = [self baseHeadersWithAdditionalHeaders:additionalHeaders];
+    NSURLSessionConfiguration *config = [self sessionConfigurationWithHeaders:headers];
+    
     [[self class] PUTResource:URI
                       baseURL:self.baseURL
-                       config:configuration
+                       config:config
                       timeout:self.timeoutInterval
                       payload:payload
                      response:^(id resource, NSError *error)
      {
          EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, resource, error);
      }];
-
 }
+
+// DELETE
 
 - (void)DELETEResource:(NSString *)URI
               response:(OriginateHTTPClientResponse)responseBlock
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.allowsCellularAccess = YES;
-    configuration.HTTPAdditionalHeaders = [self.authorizedObject authorizationHeader];
+    [self DELETEResource:URI additionalHeaders:nil response:responseBlock];
+}
 
+- (void)DELETEResource:(NSString *)URI
+     additionalHeaders:(NSDictionary *)additionalHeaders
+              response:(OriginateHTTPClientResponse)responseBlock
+{
+    NSDictionary *headers = [self baseHeadersWithAdditionalHeaders:additionalHeaders];
+    NSURLSessionConfiguration *config = [self sessionConfigurationWithHeaders:headers];
+    
     [[self class] DELETEResource:URI
                          baseURL:self.baseURL
-                          config:configuration
+                          config:config
                          timeout:self.timeoutInterval
                         response:^(id resource, NSError *error)
      {
@@ -155,9 +228,10 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     NSURLSessionDataTask *task;
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL
-                                             cachePolicy:NSURLRequestReloadRevalidatingCacheData
-                                         timeoutInterval:timeout];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
+                                                           cachePolicy:NSURLRequestReloadRevalidatingCacheData
+                                                       timeoutInterval:timeout];
+    [request setHTTPMethod:@"GET"];
     
     task = [session dataTaskWithRequest:request
                       completionHandler:^(NSData *data,
@@ -188,10 +262,6 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
                                                            cachePolicy:NSURLRequestReloadRevalidatingCacheData
                                                        timeoutInterval:timeout];
-
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:payload];
     
@@ -224,10 +294,6 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
                                                            cachePolicy:NSURLRequestReloadRevalidatingCacheData
                                                        timeoutInterval:timeout];
-
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-
     [request setHTTPMethod:@"PATCH"];
     [request setHTTPBody:body];
     
@@ -261,12 +327,7 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
                                                            cachePolicy:NSURLRequestReloadRevalidatingCacheData
                                                        timeoutInterval:timeout];
-
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-
     [request setHTTPMethod:@"PUT"];
-
     [request setHTTPBody:body];
 
     task = [session dataTaskWithRequest:request
@@ -298,7 +359,6 @@ NSString * const OriginateHTTPClientResponseNotification = @"com.originate.http-
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
                                                            cachePolicy:NSURLRequestReloadRevalidatingCacheData
                                                        timeoutInterval:timeout];
-
     [request setHTTPMethod:@"DELETE"];
 
     task = [session dataTaskWithRequest:request
