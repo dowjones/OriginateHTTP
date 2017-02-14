@@ -384,6 +384,7 @@ evaluateLocationHeader:(BOOL)evaluateLocationHeader
 {
     NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
     NSError *error = [self errorForResponse:HTTPResponse connectionError:responseError];
+    
     NSString *rawResponseString = data.length > 0 ? [[NSString alloc] initWithData:data
                                                                           encoding:NSUTF8StringEncoding] : nil;
     id result = rawResponseString;
@@ -397,11 +398,23 @@ evaluateLocationHeader:(BOOL)evaluateLocationHeader
         return;
     }
     
+    /**
+     * Error or non-success status code. Parse the data, so the application can
+     * assess any error information in the body of the response.
+     */
     if (error || HTTPResponse.statusCode < 200 || HTTPResponse.statusCode > 299) {
-        EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, rawResponseString, error);
+        NSError *parseError = nil; // Not needed, we return the response error.
+        id parsedResponse = [[self class] parseResponse:HTTPResponse
+                                                   data:data
+                                                  error:&parseError];
+        
+        EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, parsedResponse, error);
         return;
     }
     
+    /**
+     * Data length = 0? This might be OK for certain status codes.
+     */
     if (data.length == 0) {
         if ([[self class] emptyBodyAcceptableForHTTPResponse:HTTPResponse]) {
             EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, nil, nil);
@@ -412,20 +425,19 @@ evaluateLocationHeader:(BOOL)evaluateLocationHeader
         return;
     }
     
-    if (([HTTPResponse.allHeaderFields[@"Content-Type"] containsString:@"application/json"] ||
-         [HTTPResponse.allHeaderFields[@"Content-Type"] containsString:@"application/vnd.api+json"]) &&
-        data.length > 0) {
-        result = [NSJSONSerialization JSONObjectWithData:data
-                                                 options:NSJSONReadingAllowFragments
-                                                   error:&error];
-        
-        if (error) {
-            error = [[self class] errorDecodingJSON];
-        }
+    /**
+     * Parse response data. Either JSON or string, depending on content type.
+     */
+    NSError *parseError = nil;
+    id parsedResponse = [[self class] parseResponse:HTTPResponse
+                                               data:data
+                                              error:&parseError];
+    if (parseError) {
+        EXEC_BLOCK_SAFELY_ON_MAIN_QUEUE(responseBlock, rawResponseString, parseError);
+        return;
     }
     else {
-        result = [[NSString alloc] initWithData:data
-                                       encoding:NSUTF8StringEncoding];
+        result = parsedResponse;
     }
     
     if (evaluateLocationHeader) {
@@ -450,6 +462,33 @@ evaluateLocationHeader:(BOOL)evaluateLocationHeader
     }
 }
 
++ (nullable id)parseResponse:(NSHTTPURLResponse *)response
+                        data:(NSData *)data
+                       error:(NSError **)error {
+    id parsedData = nil;
+    
+    if ([[self class] isJSONResponse:response] && data.length > 0) {
+        NSError *serializationError = nil;
+        parsedData = [NSJSONSerialization JSONObjectWithData:data
+                                                     options:NSJSONReadingAllowFragments
+                                                       error:&serializationError];
+        
+        if (serializationError) {
+            *error = [[self class] errorDecodingJSON];
+        }
+    }
+    else {
+        parsedData = [[NSString alloc] initWithData:data
+                                           encoding:NSUTF8StringEncoding];
+    }
+    
+    return parsedData;
+}
+
++ (BOOL)isJSONResponse:(NSHTTPURLResponse *)response {
+    return [response.allHeaderFields[@"Content-Type"] containsString:@"application/json"] ||
+    [response.allHeaderFields[@"Content-Type"] containsString:@"application/vnd.api+json"];
+}
 
 #pragma mark - Errors
 
